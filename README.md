@@ -1,2 +1,2 @@
 # Check_MK_Plugins
-Plugin for CheckMK
+This repository contains Sample Plugin for CheckMK
