@@ -1,0 +1,24 @@
+#!/usr/bin/python
+
+def inventory_SMTP_Sessions(info):
+    yield None, info
+
+def Check_SMTP_Sessions(checktype, params, info):
+    info = int(info[0][0])
+    perfdata = [( "Sessions", info )]
+    if info >= 50:
+       return 2, "Critical Sessions=%s" % info, perfdata
+    elif info >= 20:
+       return 1, "Warning Sessions=%s" % info, perfdata
+    else:
+       return 0, "OK Sessions=%s" % info, perfdata
+
+#.1.3.6.1.4.1.2021.55.3.1.1.1.115
+
+check_info["SMTP_sessions"] = {
+    'check_function':          Check_SMTP_Sessions,
+    'inventory_function':     inventory_SMTP_Sessions,
+    'service_description':     'SMTP Sessions',
+    'has_perfdata':             True,
+    'snmp_info':               ('.1.3.6.1.4.1.2021.55.3.1.1.1', ["115"]),
+}
